@@ -28,6 +28,13 @@ public class NoteController {
 	@Autowired
 	private NoteService noteService;
 	
+	/**
+	 * Get a note
+	 * 
+	 * @param noteId
+	 * @return Http Response
+	 */
+	
 	@RequestMapping(method = RequestMethod.GET, 
 			value = "/{noteId}", 
 			produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -42,28 +49,59 @@ public class NoteController {
 		}
     }
 	
+	/**
+	 * Get list of all notes
+	 * 
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET, 
 			produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<Note> getNotes() {
-		return noteService.getNotes();
+    public ResponseEntity<List<Note>> getNotes() {
+		return new ResponseEntity<List<Note>>(noteService.getNotes(), HttpStatus.OK);
     }
 	
+	/**
+	 * 
+	 * Add a new note
+	 * 
+	 * @param note
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.POST, 
 			consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public Note addNote(@RequestBody Note note) {
-        return noteService.addNote(note);
+    public ResponseEntity<Note> addNote(@RequestBody Note note) {
+        Note addedNote =  noteService.addNote(note);
+        return new ResponseEntity<Note>(addedNote, HttpStatus.OK);
     }
 	
+	/**
+	 * 
+	 * Update a existing note
+	 * 
+	 * @param noteId
+	 * @param note
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.PUT, 
 			value = "/{noteId}", 
 			consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public Note updateNote(@PathVariable("noteId") Long noteId, @RequestBody Note note) {
-        return noteService.updateNote(noteId, note);
+    public ResponseEntity<Note> updateNote(@PathVariable("noteId") Long noteId, @RequestBody Note note) {
+        Note updateNote = noteService.updateNote(noteId, note);
+        return new ResponseEntity<Note>(updateNote, HttpStatus.OK);
     }
 	
-	@RequestMapping(method = RequestMethod.DELETE)
-    public void deleteNote(@PathVariable("noteId") Long noteId) {
+	/**
+	 * 
+	 * Delete a note
+	 * 
+	 * @param noteId
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.DELETE,
+			value = "/{noteId}")
+    public ResponseEntity<Void> deleteNote(@PathVariable("noteId") Long noteId) {
 		noteService.deleteNote(noteId);
+		return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
