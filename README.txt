@@ -23,31 +23,31 @@
 
 	Get all notes
 	
-	URL: http://localhost:9080/notes
+	URL: http://localhost:8080/notes
 	HTTP: GET
 		
 	Get a note
 	
-	URL: http://localhost:9080/notes/<noteId>
+	URL: http://localhost:8080/notes/<noteId>
 	HTTP: GET
 	
 	Add a note
 	
-	URL: http://localhost:9080/notes
+	URL: http://localhost:8080/notes
 	HTTP: POST
 	Content-Type: application/json
 	Body: {"message": "new note"}
 	
 	Update a note
 	
-	URL: http://localhost:9080/notes/<noteId>
+	URL: http://localhost:8080/notes/<noteId>
 	HTTP: PUT
 	Content-Type: application/json
 	Body: {"message": "updated note"}
 	
 	Delete a note
 	
-	URL: http://localhost:9080/notes/<noteId>
+	URL: http://localhost:8080/notes/<noteId>
 	HTTP: DELETE
 	
 	
